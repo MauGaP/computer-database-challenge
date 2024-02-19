@@ -1,3 +1,5 @@
+export const HOME_URL = '/computers'
+
 export const CONFIRMATION_ALERT = '.alert-message';
 
 export const ADDCOMPUTER_BUTTON = '#add';

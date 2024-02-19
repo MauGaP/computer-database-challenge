@@ -6,9 +6,17 @@ import {
   NAME_INPUT,
 } from './pageobjects/add-computer.page';
 import {
+  clickElement,
+  navigateTo,
+  selectDropdownOption,
+  typeOnElement,
+  validateElementText,
+} from './pageobjects/base.page';
+import {
   ADDCOMPUTER_BUTTON,
   CONFIRMATION_ALERT,
   FIRSTNAME_TABLEDATA,
+  HOME_URL,
   SEARCH_INPUT,
   SUBMITFILTER_BUTTON,
 } from './pageobjects/home.page';
@@ -19,12 +27,13 @@ describe('computer creation', () => {
   it('adds a new computer with only name', () => {
     var name = createRandomName();
 
-    cy.visit('/');
-    cy.get(ADDCOMPUTER_BUTTON).click();
-    cy.get(NAME_INPUT).type(name);
-    cy.get(CREATE_BUTTON).click();
+    navigateTo(HOME_URL);
 
-    cy.get(CONFIRMATION_ALERT).should('contain', `Computer ${name} has been created`);
+    clickElement(ADDCOMPUTER_BUTTON);
+    typeOnElement(NAME_INPUT, name);
+    clickElement(CREATE_BUTTON);
+
+    validateElementText(CONFIRMATION_ALERT, `Computer ${name} has been created`);
   });
 
   it('adds a new computer with all data', () => {
@@ -32,24 +41,25 @@ describe('computer creation', () => {
     var today = createTodaysDate();
     var nextYear = createNextYearDate();
 
-    cy.visit('/');
-    cy.get(ADDCOMPUTER_BUTTON).click();
-    cy.get(NAME_INPUT).type(name);
-    cy.get(INTRODUCED_INPUT).type(today);
-    cy.get(DISCONTINUED_INPUT).type(nextYear);
-    cy.get(COMPANY_SELECT).select('Sony');
-    cy.get(CREATE_BUTTON).click();
+    navigateTo(HOME_URL);
 
-    cy.get(CONFIRMATION_ALERT).should('contain', `Computer ${name} has been created`);
+    clickElement(ADDCOMPUTER_BUTTON);
+    typeOnElement(NAME_INPUT, name);
+    typeOnElement(INTRODUCED_INPUT, today);
+    typeOnElement(DISCONTINUED_INPUT, nextYear);
+    selectDropdownOption(COMPANY_SELECT, 'Sony');
+    clickElement(CREATE_BUTTON);
+
+    validateElementText(CONFIRMATION_ALERT, `Computer ${name} has been created`);
   });
 
   it('searches for an already created computer', () => {
-    cy.visit('/');
+    navigateTo(HOME_URL);
 
-    cy.get(SEARCH_INPUT).type('Compaq');
-    cy.get(SUBMITFILTER_BUTTON).click();
+    typeOnElement(SEARCH_INPUT, 'Compaq');
+    clickElement(SUBMITFILTER_BUTTON);
 
-    cy.get(FIRSTNAME_TABLEDATA).should('contain', 'Compaq');
+    validateElementText(FIRSTNAME_TABLEDATA, 'Compaq');
   });
 
   it('adds a computer and searches for it', () => {
@@ -57,19 +67,20 @@ describe('computer creation', () => {
     var today = createTodaysDate();
     var nextYear = createNextYearDate();
 
-    cy.visit('/');
-    cy.get(ADDCOMPUTER_BUTTON).click();
-    cy.get(NAME_INPUT).type(name);
-    cy.get(INTRODUCED_INPUT).type(today);
-    cy.get(DISCONTINUED_INPUT).type(nextYear);
-    cy.get(COMPANY_SELECT).select('Sony');
-    cy.get(CREATE_BUTTON).click();
+    navigateTo(HOME_URL);
 
-    cy.get(CONFIRMATION_ALERT).should('contain', `Computer ${name} has been created`);
+    clickElement(ADDCOMPUTER_BUTTON);
+    typeOnElement(NAME_INPUT, name);
+    typeOnElement(INTRODUCED_INPUT, today);
+    typeOnElement(DISCONTINUED_INPUT, nextYear);
+    selectDropdownOption(COMPANY_SELECT, 'Sony');
+    clickElement(CREATE_BUTTON);
 
-    cy.get(SEARCH_INPUT).type(name);
-    cy.get(SUBMITFILTER_BUTTON).click();
+    validateElementText(CONFIRMATION_ALERT, `Computer ${name} has been created`);
 
-    cy.get(FIRSTNAME_TABLEDATA).should('contain', name);
+    typeOnElement(SEARCH_INPUT, name);
+    clickElement(SUBMITFILTER_BUTTON);
+    
+    validateElementText(FIRSTNAME_TABLEDATA, name);
   });
 });
