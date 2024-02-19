@@ -1,0 +1,21 @@
+{
+  "name": "computer-database-challenge",
+  "version": "1.0.0",
+  "description": "interview challenge for a company",
+  "main": "index.js",
+  "scripts": {
+    "open": "cypress open",
+    "test": "cypress run"
+  },
+  "keywords": [
+    "automation",
+    "testing",
+    "qa"
+  ],
+  "author": "maugap",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.6.4",
+    "moment": "^2.30.1"
+  }
+}
