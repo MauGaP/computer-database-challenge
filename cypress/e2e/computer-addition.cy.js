@@ -1,3 +1,17 @@
+import {
+  COMPANY_SELECT,
+  CREATE_BUTTON,
+  DISCONTINUED_INPUT,
+  INTRODUCED_INPUT,
+  NAME_INPUT,
+} from './pageobjects/add-computer.page';
+import {
+  ADDCOMPUTER_BUTTON,
+  CONFIRMATION_ALERT,
+  FIRSTNAME_TABLEDATA,
+  SEARCH_INPUT,
+  SUBMITFILTER_BUTTON,
+} from './pageobjects/home.page';
 import { createNextYearDate, createTodaysDate } from './utils/date-time-variables';
 import { createRandomName } from './utils/name-variables';
 
@@ -6,11 +20,11 @@ describe('computer creation', () => {
     var name = createRandomName();
 
     cy.visit('/');
-    cy.get('#add').click();
-    cy.get('#name').type(name);
-    cy.get('.primary').click();
+    cy.get(ADDCOMPUTER_BUTTON).click();
+    cy.get(NAME_INPUT).type(name);
+    cy.get(CREATE_BUTTON).click();
 
-    cy.get('.alert-message').should('contain', `Computer ${name} has been created`);
+    cy.get(CONFIRMATION_ALERT).should('contain', `Computer ${name} has been created`);
   });
 
   it('adds a new computer with all data', () => {
@@ -19,23 +33,23 @@ describe('computer creation', () => {
     var nextYear = createNextYearDate();
 
     cy.visit('/');
-    cy.get('#add').click();
-    cy.get('#name').type(name);
-    cy.get('#introduced').type(today);
-    cy.get('#discontinued').type(nextYear);
-    cy.get('#company').select('Sony');
-    cy.get('.primary').click();
+    cy.get(ADDCOMPUTER_BUTTON).click();
+    cy.get(NAME_INPUT).type(name);
+    cy.get(INTRODUCED_INPUT).type(today);
+    cy.get(DISCONTINUED_INPUT).type(nextYear);
+    cy.get(COMPANY_SELECT).select('Sony');
+    cy.get(CREATE_BUTTON).click();
 
-    cy.get('.alert-message').should('contain', `Computer ${name} has been created`);
+    cy.get(CONFIRMATION_ALERT).should('contain', `Computer ${name} has been created`);
   });
 
   it('searches for an already created computer', () => {
     cy.visit('/');
 
-    cy.get('#searchbox').type('Compaq');
-    cy.get('#searchsubmit').click();
+    cy.get(SEARCH_INPUT).type('Compaq');
+    cy.get(SUBMITFILTER_BUTTON).click();
 
-    cy.get('tbody > tr > :nth-child(1)').should('contain', 'Compaq')
+    cy.get(FIRSTNAME_TABLEDATA).should('contain', 'Compaq');
   });
 
   it('adds a computer and searches for it', () => {
@@ -44,18 +58,18 @@ describe('computer creation', () => {
     var nextYear = createNextYearDate();
 
     cy.visit('/');
-    cy.get('#add').click();
-    cy.get('#name').type(name);
-    cy.get('#introduced').type(today);
-    cy.get('#discontinued').type(nextYear);
-    cy.get('#company').select('Sony');
-    cy.get('.primary').click();
+    cy.get(ADDCOMPUTER_BUTTON).click();
+    cy.get(NAME_INPUT).type(name);
+    cy.get(INTRODUCED_INPUT).type(today);
+    cy.get(DISCONTINUED_INPUT).type(nextYear);
+    cy.get(COMPANY_SELECT).select('Sony');
+    cy.get(CREATE_BUTTON).click();
 
-    cy.get('.alert-message').should('contain', `Computer ${name} has been created`);
+    cy.get(CONFIRMATION_ALERT).should('contain', `Computer ${name} has been created`);
 
-    cy.get('#searchbox').type(name);
-    cy.get('#searchsubmit').click();
+    cy.get(SEARCH_INPUT).type(name);
+    cy.get(SUBMITFILTER_BUTTON).click();
 
-    cy.get('tbody > tr > :nth-child(1)').should('contain', name)
+    cy.get(FIRSTNAME_TABLEDATA).should('contain', name);
   });
 });
