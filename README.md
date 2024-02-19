@@ -53,3 +53,7 @@ The table is empty.
 - Another evidence is that the number of computers does not increase when you create a new computer.
 - I have found an issue when opening the console, that there is a 404 error,
 Failed to load resource: the server responded with a status of 404 (Not Found), but I don't know what is the missing resource, this is when I open the console for the first time. I don't think is related to the bug I found.
+
+#### About the structure:
+I ended up using something similar to page object modal and cucumber.
+Any questions regarding the structure, you can find information in this medium playlist I created a while back: https://maugap.medium.com/list/cypress-for-dummies-01c3e8dca287

@@ -1,4 +1,4 @@
-export const HOME_URL = '/computers'
+export const COMPUTERS_URL = '/computers';
 
 export const CONFIRMATION_ALERT = '.alert-message';
 

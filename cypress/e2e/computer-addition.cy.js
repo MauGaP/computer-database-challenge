@@ -19,7 +19,7 @@ import {
   HOME_URL,
   SEARCH_INPUT,
   SUBMITFILTER_BUTTON,
-} from './pageobjects/home.page';
+} from './pageobjects/computers.page';
 import { createNextYearDate, createTodaysDate } from './utils/date-time-variables';
 import { createRandomName } from './utils/name-variables';
 
@@ -80,7 +80,7 @@ describe('computer creation', () => {
 
     typeOnElement(SEARCH_INPUT, name);
     clickElement(SUBMITFILTER_BUTTON);
-    
+
     validateElementText(FIRSTNAME_TABLEDATA, name);
   });
 });
